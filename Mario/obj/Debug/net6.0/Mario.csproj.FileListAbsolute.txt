@@ -46,3 +46,4 @@ C:\Users\Zhura\OneDrive\Рабочий стол\mario\Mario\Mario\bin\Debug\net6
 C:\Users\Zhura\OneDrive\Рабочий стол\mario\Mario\Mario\bin\Debug\net6.0\Textures\restartButton.png
 C:\Users\Zhura\OneDrive\Рабочий стол\mario\Mario\Mario\bin\Debug\net6.0\Textures\scoreCoin.png
 C:\Users\Zhura\OneDrive\Рабочий стол\mario\Mario\Mario\bin\Debug\net6.0\Textures\startButton.png
+C:\Users\Zhura\OneDrive\Рабочий стол\mario\Mario\Mario\obj\Debug\net6.0\Mario.sourcelink.json

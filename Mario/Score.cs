@@ -17,8 +17,8 @@ namespace Mario
         public float[,] texCoordinates = new float[,] { { 0f, 1f, 1f, 0f }, { 1f, 1f, 0f, 0f } };
 
         private int rows = 1,
-            columns = 3,
-            choosenAnimationFrameCount = 3,
+            columns = 6,
+            choosenAnimationFrameCount = 6,
             choosenAnimationFrameNumber = 0,
             choosenAnimationRowNumber = 0;
 

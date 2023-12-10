@@ -20,40 +20,46 @@ namespace Mario
             menuButtonId;
 
         Background background = new Background();
-        Player player = new Player();
         Score score = new Score();
         Menu menu = new Menu();
 
-        Pipe pipe = new Pipe(
-            new float[] { 0.2f, 0.3f, 0.3f, 0.2f },
-            new float[] { -0.89f, -0.89f, -0.69f, -0.69f }
-        );
+        static List<Pipe> pipes = new List<Pipe>
+        {
+            new Pipe(
+                new float[] { 0.2f, 0.3f, 0.3f, 0.2f },
+                new float[] { -0.89f, -0.89f, -0.69f, -0.69f }
+            ),
+        };
 
-        List<Brick> bricks = new List<Brick>
+        static List<Brick> bricks = new List<Brick>
         {
             new Brick(
-                new float[] {-0.2f, -0.16f, -0.16f, -0.2f },
-                new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
-                ),
-             new Brick(
-                new float[] {0.5f, 0.54f, 0.54f, 0.5f },
-                new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
-                ),
-            new Brick(
-                new float[] {-0.4f, -0.36f, -0.36f, -0.4f },
-                new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
+                new float[] {-0.23f, 0.13f, 0.13f, -0.23f },
+                new float[] {-0.65f, -0.65f, -0.6f, -0.6f }
                 ),
         };
 
-        List<MysteryBlock> mysteryBlocks = new List<MysteryBlock>
+        static List<MysteryBlock> mysteryBlocks = new List<MysteryBlock>
         {
             new MysteryBlock(
                 new float[] {0.5f, 0.54f, 0.54f, 0.5f },
-                new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
+                new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
                 ),
             new MysteryBlock(
-                new float[] {-0.4f, -0.36f, -0.36f, -0.4f },
-                new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
+                new float[] {-0.7f, -0.66f, -0.66f, -0.7f },
+                new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+            new MysteryBlock(
+                    new float[] {-0.5f, -0.46f, -0.46f, -0.5f },
+                    new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+            new MysteryBlock(
+                    new float[] {0f, 0.04f, 0.04f, 0f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
+            new MysteryBlock(
+                    new float[] {-0.18f, -0.14f, -0.14f, -0.18f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
                 ),
         };
 
@@ -61,13 +67,27 @@ namespace Mario
         {
             new Coin(
                 new float[] { 0.51f, 0.53f, 0.53f, 0.51f },
-                new float[] { -0.5f, -0.5f, -0.45f, -0.45f }
+                new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
                 ),
             new Coin(
-                new float[] {-0.39f, -0.37f, -0.37f, -0.39f },
-                new float[] { -0.5f, -0.5f, -0.45f, -0.45f }
-                )
+                new float[] {-0.69f, -0.67f, -0.67f, -0.69f },
+                new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+            new Coin(
+                new float[] {-0.49f, -0.47f, -0.47f, -0.49f },
+                new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+            new Coin(
+                    new float[] {-0.17f, -0.15f, -0.15f, -0.17f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
+            new Coin(
+                    new float[] {-0.17f, -0.15f, -0.15f, -0.17f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
         };
+
+        Player player = new Player(pipes, bricks, mysteryBlocks);
 
         int counter = 0;
 
@@ -105,24 +125,24 @@ namespace Mario
                 Close();
             }
 
-            if (KeyboardState.IsKeyDown(Keys.Left) && !player.jump && menu.gameStatus == 1)
+            if (KeyboardState.IsKeyDown(Keys.Left) && menu.gameStatus == 1)
             {
                 player.run = true;
                 player.OnMove(0);
             }
 
-            if (KeyboardState.IsKeyDown(Keys.Left) && player.jump && menu.gameStatus == 1)
+            if (KeyboardState.IsKeyDown(Keys.Left) && menu.gameStatus == 1)
             {
                 player.OnMove(0);
             }
 
-            if (KeyboardState.IsKeyDown(Keys.Right) && !player.jump && menu.gameStatus == 1)
+            if (KeyboardState.IsKeyDown(Keys.Right) && menu.gameStatus == 1)
             {
                 player.run = true;
                 player.OnMove(1);
             }
 
-            if (KeyboardState.IsKeyDown(Keys.Right) && player.jump && menu.gameStatus == 1)
+            if (KeyboardState.IsKeyDown(Keys.Right) && menu.gameStatus == 1)
             {
                 player.OnMove(1);
             }
@@ -133,9 +153,8 @@ namespace Mario
         {
             base.OnKeyUp(e);
 
-            if (e.Key == Keys.Space && !player.jump && menu.gameStatus == 1)
+            if (e.Key == Keys.Space && menu.gameStatus == 1)
             {
-                player.jump = true;
                 player.run = false;
                 player.Jump();
             }
@@ -235,12 +254,14 @@ namespace Mario
                         player.RunPlayer(playerRunId);
                     }
 
-                    pipe.DrawPipe(pipeId);
+                    for (int i = 0; i < pipes.Count; i++)
+                    {
+                        pipes[i].DrawPipe(pipeId);
+                    }
 
                     for (int i = 0; i < bricks.Count; i++)
                     {
                         bricks[i].DrawBrick(brickId);
-                        player.CheckBrick(bricks[i]);
                     }
 
                     for (int i = 0; i < mysteryBlocks.Count; i++)
@@ -253,7 +274,6 @@ namespace Mario
                         {
                             mysteryBlocks[i].DrawMysteryBlock(emptyBlockId);
                         }
-                        player.CheckMysteryBlock(mysteryBlocks[i]);
 
                         if (mysteryBlocks[i].hit && mysteryBlocks[i].coin)
                         {
@@ -262,6 +282,8 @@ namespace Mario
                             counter++;
                         }
                     }
+
+                    player.CheckPlatform();
 
                     for (int i = 0; i < coins.Count; i++)
                     {
@@ -274,16 +296,17 @@ namespace Mario
                     score.DrawScore(scoreId, counter);
                     score.DrawCoin(scoreCoinId);
 
-                    player.CheckPipe(pipe);
                     break;
                 case 2:
 
-                    pipe.DrawPipe(pipeId);
+                    for (int i = 0; i < pipes.Count; i++)
+                    {
+                        pipes[i].DrawPipe(pipeId);
+                    }
 
                     for (int i = 0; i < bricks.Count; i++)
                     {
                         bricks[i].DrawBrick(brickId);
-                        player.CheckBrick(bricks[i]);
                     }
 
                     for (int i = 0; i < mysteryBlocks.Count; i++)
@@ -350,7 +373,6 @@ namespace Mario
 
         public void Clear()
         {
-            player = new Player();
             score = new Score();
 
             counter = 0;
@@ -359,25 +381,52 @@ namespace Mario
             {
                 new MysteryBlock(
                     new float[] {0.5f, 0.54f, 0.54f, 0.5f },
-                    new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
+                    new float[] {-0.6f, -0.6f, -0.55f, -0.55f }
                     ),
                 new MysteryBlock(
-                    new float[] {-0.4f, -0.36f, -0.36f, -0.4f },
-                    new float[] {-0.5f, -0.5f, -0.45f, -0.45f }
-                    ),
+                    new float[] {-0.7f, -0.66f, -0.66f, -0.7f },
+                    new float[] {-0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+                new MysteryBlock(
+                    new float[] {-0.5f, -0.46f, -0.46f, -0.5f },
+                    new float[] {-0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+                new MysteryBlock(
+                    new float[] {0f, 0.04f, 0.04f, 0f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
+                new MysteryBlock(
+                    new float[] {-0.18f, -0.14f, -0.14f, -0.18f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
+
             };
 
             coins = new List<Coin>
             {
                 new Coin(
                     new float[] { 0.51f, 0.53f, 0.53f, 0.51f },
-                    new float[] { -0.5f, -0.5f, -0.45f, -0.45f }
+                    new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
                     ),
                 new Coin(
-                    new float[] {-0.39f, -0.37f, -0.37f, -0.39f },
-                    new float[] { -0.5f, -0.5f, -0.45f, -0.45f }
-                    )
+                    new float[] {-0.69f, -0.67f, -0.67f, -0.69f },
+                    new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
+                    ),
+                new Coin(
+                    new float[] {-0.49f, -0.47f, -0.47f, -0.49f },
+                    new float[] { -0.6f, -0.6f, -0.55f, -0.55f }
+                ),
+                new Coin(
+                    new float[] {0.01f, 0.03f, 0.03f, 0.01f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
+                new Coin(
+                    new float[] {-0.17f, -0.15f, -0.15f, -0.17f },
+                    new float[] {-0.15f, -0.15f, -0.1f, -0.1f }
+                ),
             };
+
+            player = new Player(pipes, bricks, mysteryBlocks);
         }
     }
 }
