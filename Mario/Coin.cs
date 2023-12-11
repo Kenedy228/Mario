@@ -64,7 +64,7 @@ namespace Mario
             {
                 for (int i = 0; i < yCoordinates.Length; i++)
                 {
-                    yCoordinates[i] += 0.001f;
+                    yCoordinates[i] += 0.005f;
                 }
                 //увеличиваем счетчик
                 counter++;
@@ -74,14 +74,14 @@ namespace Mario
             {
                 for (int i = 0; i < yCoordinates.Length; i++)
                 {
-                    yCoordinates[i] -= 0.001f;
+                    yCoordinates[i] -= 0.005f;
                 }
                 //уменьшаем счетчик
                 counter--;
             }
 
-            //если счетчик больше 100, тогда опускаем монетку
-            if (counter > 100)
+            //если счетчик больше 20, тогда опускаем монетку
+            if (counter > 20)
             {
                 up = false;
             }

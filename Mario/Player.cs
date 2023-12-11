@@ -38,7 +38,7 @@ namespace Mario
 
         public bool isGrounded = true;
 
-        public float gravity = 0.01f;
+        public float gravity = 0.02f;
         public float distance = 0.04f;
 
         //прыжок только если находимся на платформе
@@ -93,7 +93,7 @@ namespace Mario
 
             frameDelay++;
 
-            if (frameDelay > 20)
+            if (frameDelay > 10)
             {
                 choosenAnimationFrameNumber++;
                 choosenAnimationFrameNumber %= choosenAnimationFrameCount;
@@ -121,7 +121,7 @@ namespace Mario
 
                     for (int i = 0; i < xCoordinates.Length; i++)
                     {
-                        xCoordinates[i] -= 0.001f;
+                        xCoordinates[i] -= 0.002f;
                     }
                     break;
                 case 1:
@@ -132,7 +132,7 @@ namespace Mario
                     }
                     for (int i = 0; i < xCoordinates.Length; i++)
                     {
-                        xCoordinates[i] += 0.001f;
+                        xCoordinates[i] += 0.002f;
                     }
                     break;
             }
