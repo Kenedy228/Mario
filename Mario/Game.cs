@@ -93,10 +93,6 @@ namespace Mario
 
         Vector2 cursorPosition = new Vector2();
 
-        double targetFPS = 30.0;
-        Stopwatch stopwatch = new Stopwatch();
-        double elapsedTime = 0.0;
-
         public Game(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeSettings)
             : base(gameWindowSettings, nativeSettings)
         {
@@ -191,8 +187,6 @@ namespace Mario
 
             GL.Enable(EnableCap.Texture2D);
 
-            stopwatch.Start();
-
         }
 
         protected override void OnResize(ResizeEventArgs e)
@@ -211,21 +205,6 @@ namespace Mario
         {
             base.OnRenderFrame(args);
 
-            double deltaTime = stopwatch.Elapsed.TotalMilliseconds;
-            elapsedTime += deltaTime;
-
-            if (elapsedTime >= 1 / targetFPS)
-            {
-                RenderFrame();
-                SwapBuffers();
-                elapsedTime = 0;
-            }
-
-            Thread.Sleep(5);
-        }
-
-        public void RenderFrame()
-        {
             GL.Clear(ClearBufferMask.ColorBufferBit);
             background.DrawBackground(backgroundId);
 
@@ -368,7 +347,8 @@ namespace Mario
                     break;
             }
 
-            GL.Flush();
+            SwapBuffers();
+
         }
 
         public void Clear()

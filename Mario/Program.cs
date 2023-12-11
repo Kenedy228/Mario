@@ -11,11 +11,18 @@ namespace FlappyBird
     {
         static void Main()
         {
+            //создаем объект Bitmap, передавая путь нашей картинки
             Bitmap image = new Bitmap("Textures/mario-stay.png");
 
+            //объект иконки из пространства имен OpenTK
+            //принимает ширину, высоту и массив байтов из цветов каждого пикселя картинки 
             OpenTK.Windowing.Common.Input.Image icon = new OpenTK.Windowing.Common.Input.Image(image.Width, image.Height, GetPixels(image));
 
-            GameWindowSettings gSettings = new GameWindowSettings();
+            //задаем 60 фпс
+            GameWindowSettings gSettings = new GameWindowSettings() 
+            {
+                UpdateFrequency = 60.0
+            };
             NativeWindowSettings nSettings = new NativeWindowSettings()
             {
                 Title = "Mario",
@@ -29,6 +36,7 @@ namespace FlappyBird
             game.Run();
         }
 
+        //обработка пикселей, составление массива байтов из каждого пикселя иконки
         static byte[] GetPixels(Bitmap image)
         {
             byte[] pixels = new byte[image.Width * image.Height * 4];
