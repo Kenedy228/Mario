@@ -8,28 +8,36 @@ using OpenTK.Graphics.OpenGL;
 
 namespace Mario
 {
+    //класс заднего фона
     internal class Background : TextureDrawing
     {
+        //массив координат по x и y
         private float[,] coordinates = new float[,]
         {
             {-1, 1, 1, -1 },
             {-1, -1, 1, 1 },
         };
 
+        //массив координат бокса
         private float[,] texCoordinates = new float[,]
         {
             { 0f, 1f, 1f, 0f },
             { 1f, 1f, 0f, 0f }
         };
 
+        //цвет маски над картинкой (В данном случае белый)
         private Color4 maskColor = Color4.White;
 
+        //рисуем задний фон
         public void DrawBackground(int textureId)
         {
+            //биндим текстуру
             base.Bind(textureId);
 
+            //устанавливаем цвет обтравочной маски
             GL.Color4(maskColor);
 
+            //отрисовываем текстуру
             base.Draw(
                 texCoordinates,
                 coordinates
