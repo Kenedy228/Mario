@@ -2,9 +2,6 @@
 using OpenTK.Windowing.Desktop;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using OpenTK;
-using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Mathematics;
@@ -201,10 +198,7 @@ namespace Mario
         {
             base.OnLoad();
 
-            GL.ClearColor(0, 0, 0, 0);
-
             GL.Enable(EnableCap.Texture2D);
-
         }
 
         //метод для изменения размеров окна
@@ -346,28 +340,10 @@ namespace Mario
                     score.DrawScore(scoreId, counter);
                     score.DrawCoin(scoreCoinId);
 
-                    if (!player.finish)
-                    {
-                        player.RunPlayer(playerRunId);
-
-                        if (!player.turnedLeft)
-                        {
-                            player.OnMove(1);
-                        }
-                        else
-                        {
-                            player.OnMove(0);
-                        }
-
-                        player.FinishAnimation();
-                    }
-                    else
-                    {
-                        menu.DrawMenu(
+                    menu.DrawMenu(
                         new int[] { restartButtonId, menuButtonId },
                         new string[] { "restart", "menu" }
-                        );
-                    }
+                    );
 
                     break;
                 //если нажали на выход, то закрываем игру

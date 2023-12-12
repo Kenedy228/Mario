@@ -159,7 +159,7 @@ namespace Mario
                     //отнимаем значение каждой x координаты (так как движемся влево)
                     for (int i = 0; i < xCoordinates.Length; i++)
                     {
-                        xCoordinates[i] -= 0.002f;
+                        xCoordinates[i] -= 0.004f;
                     }
                     break;
                 //1 - движение вправо
@@ -174,7 +174,7 @@ namespace Mario
                     //прибавляем значение каждой x координаты (так как движемся вправо)
                     for (int i = 0; i < xCoordinates.Length; i++)
                     {
-                        xCoordinates[i] += 0.002f;
+                        xCoordinates[i] += 0.004f;
                     }
                     break;
             }
@@ -415,39 +415,11 @@ namespace Mario
             //если координата по x больше 0.6f, то есть марио около замка, то вызываем анимацию окончания
             if (xCoordinates[0] > 0.6f)
             {
-                FinishAnimation();
                 return 2;
             }
             else
             {
                 return 1;
-            }
-        }
-
-        //финишная анимаци, марио бежит в дверь
-        public void FinishAnimation()
-        {
-            if (!turnedLeft)
-            {
-                if (xCoordinates[0] < 0.75f)
-                {
-                    OnMove(1);
-                }
-                else
-                {
-                    finish = true;
-                }
-            }
-            else
-            {
-                if (xCoordinates[0] > 0.75f)
-                {
-                    OnMove(0);
-                }
-                else
-                {
-                    finish = true;
-                }
             }
         }
     }

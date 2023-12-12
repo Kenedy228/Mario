@@ -25,17 +25,11 @@ namespace Mario
             { 1f, 1f, 0f, 0f }
         };
 
-        //цвет маски над картинкой (В данном случае белый)
-        private Color4 maskColor = Color4.White;
-
         //рисуем задний фон
         public void DrawBackground(int textureId)
         {
             //биндим текстуру
             base.Bind(textureId);
-
-            //устанавливаем цвет обтравочной маски
-            GL.Color4(maskColor);
 
             //отрисовываем текстуру
             base.Draw(
