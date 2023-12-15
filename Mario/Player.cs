@@ -269,10 +269,15 @@ namespace Mario
             {
                 if (yCoordinates[0] < pipes[i].yCoordinates[2] && yCoordinates[0] > pipes[i].yCoordinates[0])
                 {
-                    if ((!turnedLeft && xCoordinates[1] - distance > pipes[i].xCoordinates[0] &&
-                        xCoordinates[1] - distance < pipes[i].xCoordinates[1])
-                        || (turnedLeft && xCoordinates[1] + distance > pipes[i].xCoordinates[0] &&
-                        xCoordinates[1] + distance < pipes[i].xCoordinates[1] ))
+                    if ((!turnedLeft
+                        &&((xCoordinates[1] > pipes[i].xCoordinates[0] && xCoordinates[0] < pipes[i].xCoordinates[0])
+                        || (xCoordinates[0] < pipes[i].xCoordinates[1] && xCoordinates[1] > pipes[i].xCoordinates[1])
+                        || (xCoordinates[0] > pipes[i].xCoordinates[0] && xCoordinates[1] < pipes[i].xCoordinates[1])))
+                        || 
+                        (turnedLeft 
+                        && ((xCoordinates[1] < pipes[i].xCoordinates[1] && xCoordinates[0] > pipes[i].xCoordinates[1])
+                        || (xCoordinates[1] < pipes[i].xCoordinates[0] && xCoordinates[0] > pipes[i].xCoordinates[0])
+                        || (xCoordinates[1] > pipes[i].xCoordinates[0] && xCoordinates[0] < pipes[i].xCoordinates[1]))))
                     {
                         yCoordinates[0] = pipes[i].yCoordinates[2];
                         yCoordinates[1] = pipes[i].yCoordinates[2];
@@ -288,10 +293,16 @@ namespace Mario
             {
                 if (yCoordinates[0] <= bricks[i].yCoordinates[2] && yCoordinates[0] > bricks[i].yCoordinates[0])
                 {
-                    if ((!turnedLeft && xCoordinates[1] - distance > bricks[i].xCoordinates[0] &&
-                        xCoordinates[1] - distance < bricks[i].xCoordinates[1])
-                        || (turnedLeft && xCoordinates[1] + distance > bricks[i].xCoordinates[0] &&
-                        xCoordinates[1] + distance < bricks[i].xCoordinates[1]))
+                    if ((!turnedLeft 
+                        && ((xCoordinates[1] > bricks[i].xCoordinates[0] && xCoordinates[0] < bricks[i].xCoordinates[0])
+                        || (xCoordinates[0] < bricks[i].xCoordinates[1] && xCoordinates[1] > bricks[i].xCoordinates[1])
+                        || (xCoordinates[0] > bricks[i].xCoordinates[0] && xCoordinates[1] < bricks[i].xCoordinates[1]))
+                        || 
+                        (turnedLeft 
+                        && ((xCoordinates[1] < bricks[i].xCoordinates[1] && xCoordinates[0] > bricks[i].xCoordinates[1])
+                        || (xCoordinates[1] < bricks[i].xCoordinates[0] && xCoordinates[0] > bricks[i].xCoordinates[0])
+                        || (xCoordinates[1] > bricks[i].xCoordinates[0] && xCoordinates[0] < bricks[i].xCoordinates[1])))
+                        ))
                     {
                         yCoordinates[0] = bricks[i].yCoordinates[2];
                         yCoordinates[1] = bricks[i].yCoordinates[2];
@@ -307,10 +318,17 @@ namespace Mario
             {
                 if (yCoordinates[0] <= mysteryBlocks[i].yCoordinates[2] && yCoordinates[0] > mysteryBlocks[i].yCoordinates[0])
                 {
-                    if ((!turnedLeft && xCoordinates[1] - distance > mysteryBlocks[i].xCoordinates[0] &&
-                        xCoordinates[1] - distance < mysteryBlocks[i].xCoordinates[1])
-                        || (turnedLeft && xCoordinates[1] + distance > mysteryBlocks[i].xCoordinates[0] &&
-                        xCoordinates[1] + distance < mysteryBlocks[i].xCoordinates[1]))
+                    if ((!turnedLeft 
+                        && ((xCoordinates[1] > mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] < mysteryBlocks[i].xCoordinates[0])
+                        || (xCoordinates[0] < mysteryBlocks[i].xCoordinates[1] && xCoordinates[1] > mysteryBlocks[i].xCoordinates[1])
+                        || (xCoordinates[0] > mysteryBlocks[i].xCoordinates[0] && xCoordinates[1] < mysteryBlocks[i].xCoordinates[1]))
+                        || 
+                        (turnedLeft 
+                        && ((xCoordinates[1] < mysteryBlocks[i].xCoordinates[1] && xCoordinates[0] > mysteryBlocks[i].xCoordinates[1])
+                        || (xCoordinates[1] < mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] > mysteryBlocks[i].xCoordinates[0])
+                        || (xCoordinates[1] > mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] < mysteryBlocks[i].xCoordinates[1])
+                        ))
+                    ))
                     {
                         yCoordinates[0] = mysteryBlocks[i].yCoordinates[2];
                         yCoordinates[1] = mysteryBlocks[i].yCoordinates[2];
@@ -336,14 +354,23 @@ namespace Mario
             for (int i = 0; i < bricks.Count; i++)
             {
                 if (
-                    (!turnedLeft && xCoordinates[0] + distance > bricks[i].xCoordinates[0] && xCoordinates[1] - distance < bricks[i].xCoordinates[1])
-                    || (turnedLeft && xCoordinates[1] + distance > bricks[i].xCoordinates[0] && xCoordinates[0] - distance < bricks[i].xCoordinates[1])
-                    )
+                    (!turnedLeft 
+                    && ((xCoordinates[1] > bricks[i].xCoordinates[0] && xCoordinates[0] < bricks[i].xCoordinates[0])
+                    || (xCoordinates[0] < bricks[i].xCoordinates[1] && xCoordinates[1] > bricks[i].xCoordinates[1])
+                    || (xCoordinates[0] > bricks[i].xCoordinates[0] && xCoordinates[1] < bricks[i].xCoordinates[1]))
+                    || 
+                    (turnedLeft 
+                    && ((xCoordinates[1] < bricks[i].xCoordinates[1] && xCoordinates[0] > bricks[i].xCoordinates[1])
+                    || (xCoordinates[1] < bricks[i].xCoordinates[0] && xCoordinates[0] > bricks[i].xCoordinates[0])
+                    || (xCoordinates[1] > bricks[i].xCoordinates[0] && xCoordinates[0] < bricks[i].xCoordinates[1])))
+                    ))
                 {
                     if (
                         yCoordinates[0] < bricks[i].yCoordinates[0] && bricks[i].yCoordinates[0] - jumpForce < 0
                         )
                     {
+                        Console.WriteLine(xCoordinates[0] + " : " + xCoordinates[1]);
+                        Console.WriteLine(bricks[i].xCoordinates[0] + " : " + bricks[i].xCoordinates[1]);
                         return bricks[i].yCoordinates[0] - yCoordinates[2];
                     }
                 }
@@ -355,9 +382,16 @@ namespace Mario
             for (int i = 0; i < mysteryBlocks.Count; i++)
             {
                 if (
-                    (!turnedLeft && xCoordinates[0] + distance > mysteryBlocks[i].xCoordinates[0] && xCoordinates[1] - distance < mysteryBlocks[i].xCoordinates[1])
-                    || (turnedLeft && xCoordinates[1] + distance > mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] - distance < mysteryBlocks[i].xCoordinates[1])
+                    (!turnedLeft &&
+                    ((xCoordinates[1] > mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] < mysteryBlocks[i].xCoordinates[0])
+                    || (xCoordinates[0] < mysteryBlocks[i].xCoordinates[1] && xCoordinates[1] > mysteryBlocks[i].xCoordinates[1])
+                    || (xCoordinates[0] > mysteryBlocks[i].xCoordinates[0] && xCoordinates[1] < mysteryBlocks[i].xCoordinates[1]))
                     )
+                    || (turnedLeft 
+                    && ((xCoordinates[1] < mysteryBlocks[i].xCoordinates[1] && xCoordinates[0] > mysteryBlocks[i].xCoordinates[1])
+                    || (xCoordinates[1] < mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] > mysteryBlocks[i].xCoordinates[0])
+                    || (xCoordinates[1] > mysteryBlocks[i].xCoordinates[0] && xCoordinates[0] < mysteryBlocks[i].xCoordinates[1]))
+                    ))
                 {
                     if (
                         yCoordinates[0] < mysteryBlocks[i].yCoordinates[2] && mysteryBlocks[i].yCoordinates[0] - jumpForce < 0
@@ -412,8 +446,8 @@ namespace Mario
         //проверка на окончание игры
         public int CheckFinish()
         {
-            //если координата по x больше 0.6f, то есть марио около замка, то вызываем анимацию окончания
-            if (xCoordinates[0] > 0.6f)
+            //если координата по x больше 0.65f, то есть марио около замка, то игра окончена
+            if (xCoordinates[0] > 0.65f)
             {
                 return 2;
             }
