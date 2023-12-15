@@ -56,8 +56,11 @@ namespace Mario
 
         //переменная гравитации (скорости падения марио на землю
         public float gravity = 0.02f;
-        //переменная для искусственного сужения бокса, внутри которого текстура марио
-        public float distance = 0.04f;
+
+        //переменная - дистанция между координатами по оси x
+        public float xDistance = 0.05f;
+        //переменная - дистанция между координатами по оси y
+        public float yDistance = 0.09f;
 
         //конструктор с параметрами, принимаем списки труб, кирпиче и лаки блоков
         public Player(List<Pipe> pipes, List<Brick> bricks, List<MysteryBlock> mysteryBlocks)
@@ -281,8 +284,8 @@ namespace Mario
                     {
                         yCoordinates[0] = pipes[i].yCoordinates[2];
                         yCoordinates[1] = pipes[i].yCoordinates[2];
-                        yCoordinates[2] = pipes[i].yCoordinates[2] + 0.09f;
-                        yCoordinates[3] = pipes[i].yCoordinates[2] + 0.09f;
+                        yCoordinates[2] = pipes[i].yCoordinates[2] + yDistance;
+                        yCoordinates[3] = pipes[i].yCoordinates[2] + yDistance;
                         return true;
                     }
                 }
@@ -306,8 +309,8 @@ namespace Mario
                     {
                         yCoordinates[0] = bricks[i].yCoordinates[2];
                         yCoordinates[1] = bricks[i].yCoordinates[2];
-                        yCoordinates[2] = bricks[i].yCoordinates[2] + 0.09f;
-                        yCoordinates[3] = bricks[i].yCoordinates[2] + 0.09f;
+                        yCoordinates[2] = bricks[i].yCoordinates[2] + yDistance;
+                        yCoordinates[3] = bricks[i].yCoordinates[2] + yDistance;
                         return true;
                     }
                 }
@@ -332,8 +335,8 @@ namespace Mario
                     {
                         yCoordinates[0] = mysteryBlocks[i].yCoordinates[2];
                         yCoordinates[1] = mysteryBlocks[i].yCoordinates[2];
-                        yCoordinates[2] = mysteryBlocks[i].yCoordinates[2] + 0.09f;
-                        yCoordinates[3] = mysteryBlocks[i].yCoordinates[2] + 0.09f;
+                        yCoordinates[2] = mysteryBlocks[i].yCoordinates[2] + yDistance;
+                        yCoordinates[3] = mysteryBlocks[i].yCoordinates[2] + yDistance;
                         return true;
                     }
                 }
@@ -410,9 +413,6 @@ namespace Mario
         //проверка на трубу перед марио
         public void CheckPipe()
         {
-            //переменная - расстояние между соседними координатами по x у марио
-            float dX = 0.05f;
-
             //если движемся вправо и правая граница марио больше левой границы трубы и левая граница
             //марио меньше левой границы трубы, то марио наткнулся на трубу
             
@@ -425,19 +425,19 @@ namespace Mario
                     if ((!turnedLeft && xCoordinates[1] > pipes[i].xCoordinates[0]
                         && xCoordinates[0] < pipes[i].xCoordinates[0]))
                     {
-                        xCoordinates[0] = pipes[i].xCoordinates[0] - dX;
+                        xCoordinates[0] = pipes[i].xCoordinates[0] - xDistance;
                         xCoordinates[1] = pipes[i].xCoordinates[0];
                         xCoordinates[2] = pipes[i].xCoordinates[0];
-                        xCoordinates[3] = pipes[i].xCoordinates[0] - dX;
+                        xCoordinates[3] = pipes[i].xCoordinates[0] - xDistance;
                     }
 
                     if (turnedLeft && xCoordinates[1] < pipes[i].xCoordinates[1] 
                         && xCoordinates[0] > pipes[i].xCoordinates[1])
                     {
-                        xCoordinates[0] = pipes[i].xCoordinates[1] + dX;
+                        xCoordinates[0] = pipes[i].xCoordinates[1] + xDistance;
                         xCoordinates[1] = pipes[i].xCoordinates[1];
                         xCoordinates[2] = pipes[i].xCoordinates[1];
-                        xCoordinates[3] = pipes[i].xCoordinates[1] + dX;
+                        xCoordinates[3] = pipes[i].xCoordinates[1] + xDistance;
                     }
                 }
             }
