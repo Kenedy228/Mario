@@ -209,12 +209,6 @@ namespace Mario
             GL.Viewport(0, 0, e.Width, e.Height);
         }
 
-        //метод, вызываем перед закрытием окна
-        protected override void OnUnload()
-        {
-            base.OnUnload();
-        }
-
         //метод для рендера кадра
         protected override void OnRenderFrame(FrameEventArgs args)
         {
