@@ -1,14 +1,10 @@
 ﻿using System;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Mathematics;
 
 namespace Mario
 {
-    //родительский класс для текстур, необходим для того, чтобы избежать дубликаты кода, так как отрисовка
-    //везде одиннаковая, отличается лишь id текстуры и координатами бокса и положения текстуры
     internal class TextureDrawing
     {
-        //метод Bind позволяет связать текстуру с целевым объектом
         public void Bind(int textureId)
         {
             GL.Enable(EnableCap.Texture2D);
@@ -17,13 +13,9 @@ namespace Mario
             GL.BindTexture(TextureTarget.Texture2D, textureId);
         }
 
-        //метод отрисовки, идея в том, чтобы координатам бокса сопоставить координаты текстуры
         public void Draw(float[,] texCoordinates, float[,] vertexCoordinate)
         {
             GL.Begin(PrimitiveType.Quads);
-
-            //TexCoord2 - координата точки бокса
-            //Vertex2 - координата точки текстуры
 
             GL.TexCoord2(texCoordinates[0, 0], texCoordinates[1, 0]);
             GL.Vertex2(vertexCoordinate[0, 0], vertexCoordinate[1, 0]);
